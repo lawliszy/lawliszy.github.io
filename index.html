@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quer Namorar Comigo?</title>
+  <style>
+    body {
+      background-color: #f8f8f8;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .heart {
+      color: #ff4f78;
+      font-size: 120px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #ff4f78;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button-container button {
+      background-color: #ff4f78;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 24px;
+      padding: 12px 24px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-container button:hover {
+      background-color: #ff0066;
+    }
+  </style>
+  <script>
+    function confirmarResposta(resposta) {
+      if (resposta === "sim") {
+        mostrarNotificacao();
+        setTimeout(function () {
+          window.location.href = "https://www.youtube.com/watch?v=izGwDsrQ1eQ";
+        }, 5000);
+      } else if (resposta === "não") {
+        location.reload();
+      }
+    }
+
+    function mostrarNotificacao() {
+      if (!("Notification" in window)) {
+        alert("Este navegador não suporta notificações.");
+      } else if (Notification.permission === "granted") {
+        criarNotificacao();
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(function (permission) {
+          if (permission === "granted") {
+            criarNotificacao();
+          }
+        });
+      }
+    }
+
+    function criarNotificacao() {
+      var options = {
+        body: "Eu te amo muito!",
+        icon: "heart-icon.png"
+      };
+
+      var notification = new Notification("Mensagem de Amor", options);
+
+      setTimeout(notification.close.bind(notification), 5000);
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="heart">❤️</div>
+    <h1>QUER NAMORAR COMIGO?</h1>
+    <div class="button-container">
+      <button onclick="confirmarResposta('sim')">Sim</button>
+      <button onclick="confirmarResposta('não')">Não</button>
+    </div>
+  </div>
+</body>
+</html>
